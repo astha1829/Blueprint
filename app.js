@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // CORS Policy
 app.use(cors());
 
-// app.use(cors()
 // Database Connection
 connectDB(DATABASE_URL);
 
