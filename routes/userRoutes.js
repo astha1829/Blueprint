@@ -43,7 +43,9 @@ router.put('/replaceimage/:id', (req, res, next) => {
   
 
   router.delete('/deleteimage/:id', UserController.deleteImage);
-  router.post('/upload-video', upload.single('video'), UserController.uploadVideo);
+  
+  router.post('/gallaryimage', upload.array('images', Infinity),UserController.gallaryimage);
+
 
 
 //Protected Routes

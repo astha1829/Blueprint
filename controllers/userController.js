@@ -339,21 +339,47 @@ class UserController {
     }
   }
 
-  static async uploadVideo(req, res) {
+  static async gallaryimage(req, res) {
     try {
-      const videoFile = req.file;
-      if (!videoFile) {
-        return res.status(400).json({ message: 'No video file provided' });
+      const files = req.files; // Assuming files is an array of uploaded files
+  
+      if (!files || files.length === 0) {
+        return res.status(400).json({ message: 'No files uploaded.' });
       }
-
-      // Process the uploaded video file, save to database, etc.
-
-      res.json({ message: 'Video uploaded successfully', video: videoFile });
+  
+      const imagesData = files.map((file) => ({
+        filename: file.filename,
+        description: file.originalname,
+        // Add other properties like filePath and url as needed
+      }));
+  
+      const newImages = new ImageModel({ images: imagesData });
+      
+      // Perform any further processing or save the images to a database if needed
+      newImages.save();
+  
+      res.status(201).json({ message: 'Images added successfully' });
     } catch (error) {
-      console.error(error);
       res.status(500).json({ error: error.message });
     }
   }
+  
+
+//   static async uploadVideo(req, res) {
+//     try {
+//       const videoFile = req.file;
+//       if (!videoFile) {
+//         return res.status(400).json({ message: 'No video file provided' });
+//       }
+
+//       // Process the uploaded video file, save to database, etc.
+
+//       res.json({ message: 'Video uploaded successfully', video: videoFile });
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).json({ error: error.message });
+//     }
+//   }
 
   static async updateUserProfile(req, res) {
     try {

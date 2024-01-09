@@ -2,10 +2,14 @@ import mongoose from "mongoose";
 import fs from "fs/promises"; // Assuming you are using Node.js version >= 14
 
 const imageSchema = new mongoose.Schema({
-  filename: String,
-  description: String,
-  filePath: String,
-  url: String,
+  images: [
+    {
+      filename: String,
+      description: String,
+      filePath: String,
+      url: String,
+    }
+  ]
 });
 ``
 // Add a removeFile method to the imageSchema
