@@ -5,6 +5,7 @@ import connectDB from './config/connectdb.js';
 import userRoutes from './routes/userRoutes.js';
 import bodyParser from 'body-parser';
 
+
 const app = express();
 const port = process.env.PORT;
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -21,8 +22,16 @@ connectDB(DATABASE_URL);
 // JSON
 app.use(express.json());
 
+
+
+
 // Load Routes
 app.use('/api/user', userRoutes);
+app.post('/api/user/create', (req, res) => {
+  // Your logic for handling the POST request
+  console.log('Received POST request at /api/user/create');
+  res.send('Received POST request at /api/user/create');
+});
 
 // Manually set the path for static files
 const customUploadsPath = 'C:\\Users\\91990\\OneDrive\\Desktop\\develope\\1ST_PROJECT\\uploads';

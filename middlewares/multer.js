@@ -1,8 +1,5 @@
 import multer from 'multer';
 import path from 'path';
-//const storage = multer.memoryStorage();
-//const upload = multer({ storage: storage });
-
 
 // Set storage engine
 const storage = multer.diskStorage({
@@ -14,21 +11,10 @@ const storage = multer.diskStorage({
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  console.log('File MIME type:', file.mimetype);
-
-  if (file.mimetype.startsWith('video/')) {
-    cb(null, true);
-  } else {
-    cb(new Error('Videos only!'), false);
-  }
-};
-
-
 // Check file type
 function checkFileType(file, cb) {
-  // Allowed extensions
-  const filetypes = /jpeg|jpg|png|gif/;
+  // Allowed extensions for images and videos
+  const filetypes = /jpeg|jpg|png|gif|pdf|mp4|avi|mkv|mov/;
   // Check the extension
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   // Check the MIME type
@@ -37,22 +23,17 @@ function checkFileType(file, cb) {
   if (extname && mimetype) {
     return cb(null, true);
   } else {
-    cb('Error: Images only!');
+    cb('Error: Images and Videos only!');
   }
 }
 
-// Initiate Multer
+// Initiate Multer for both images and videos
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 1024 * 1024 * 5 }, // 5 MB limit
+  limits: { fileSize: 1024 * 1024 * 100 }, // 100 MB limit (adjust as needed)
   fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
   },
 });
-
-
-
-
-
 
 export default upload;

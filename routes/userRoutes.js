@@ -45,12 +45,16 @@ router.put('/replaceimage/:id', (req, res, next) => {
   router.delete('/deleteimage/:id', UserController.deleteImage);
   
   router.post('/gallaryimage', upload.array('images', Infinity),UserController.gallaryimage);
+  router.delete('/deleteimage', UserController.deletebyimagenames);
+  router.post('/create', upload.fields([{ name: 'profile_pic' }, { name: 'gallary' }]), UserController.uploadAllFields);
+  router.post('/uploadVideo', upload.single('video'), UserController.uploadVideo);
 
 
 
 //Protected Routes
 router.post('/changepassword', UserController.changeUserPassword)
 router.get('/loggeduser', UserController.loggeduser)
+router.delete('/deletevideo/', UserController.deleteVideosByFilenames)
 
 
 

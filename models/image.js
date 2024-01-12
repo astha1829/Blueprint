@@ -5,7 +5,7 @@ const imageSchema = new mongoose.Schema({
   images: [
     {
       filename: String,
-      description: String,
+      destination: String,
       filePath: String,
       url: String,
     }
@@ -35,3 +35,6 @@ imageSchema.methods.removeFile = async function() {
 const ImageModel = mongoose.model("images", imageSchema);
 
 export default ImageModel;
+
+
+ 
